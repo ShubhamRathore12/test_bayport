@@ -77,7 +77,7 @@ const categories = [
 
 export const ShiftingDropDown = () => {
   return (
-    <div className="flex w-full flex-col text-neutral-200 md:justify-center">
+    <div className="flex w-full justify-start text-neutral-200 md:justify-center flex-col">
       <TabsWithIcons />
 
       {/* Full-width banner image */}
@@ -86,7 +86,7 @@ export const ShiftingDropDown = () => {
         alt="Room decoration"
         width={1920}
         height={550}
-        className="w-full h-auto object-cover"
+        className="w-full h-full object-cover"
         priority
       />
     </div>
@@ -95,93 +95,43 @@ export const ShiftingDropDown = () => {
 
 const TabsWithIcons = () => {
   const [selected, setSelected] = useState<number | null>(null);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleSetSelected = (val: number | null) => {
     setSelected(val);
   };
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
   return (
     <div onMouseLeave={() => handleSetSelected(null)} className="relative">
-      {/* Mobile Menu Button */}
-      <div className="md:hidden flex justify-center mb-4">
-        <button
-          onClick={toggleMobileMenu}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-        >
-          {isMobileMenuOpen ? "Close Menu" : "Open Menu"}
-        </button>
-      </div>
+      {/* Category Icons Below */}
+      <div className="flex flex-wrap justify-center items-start gap-4 my-6">
+        {categories.map((cat, index) => (
+          <div
+            key={index}
+            className="flex flex-col items-center text-center w-24 cursor-pointer relative"
+            onMouseEnter={() => handleSetSelected(index + 1)}
+            onClick={() => handleSetSelected(index + 1)}
+          >
+            <Image
+              src={cat.icon}
+              alt={cat.name}
+              width={60}
+              height={60}
+              className="rounded-lg object-contain"
+            />
 
-      {/* Category Icons or Mobile Dropdown */}
-      <div className="relative">
-        {/* Desktop View */}
-        <div className="hidden md:flex flex-wrap justify-center items-start gap-4 my-6">
-          {categories.map((cat, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-center text-center w-24 cursor-pointer relative"
-              onMouseEnter={() => handleSetSelected(index + 1)}
-              onClick={() => handleSetSelected(index + 1)}
-            >
-              <Image
-                src={cat.icon}
-                alt={cat.name}
-                width={60}
-                height={60}
-                className="rounded-lg object-contain"
-              />
-              <span className="mt-2 text-xs text-black flex items-center justify-center hover:underline-offset-1 hover:text-black">
-                {cat.name}
-                {cat.name !== "All" && <ChevronDown className="w-3 h-3 ml-1" />}
-              </span>
-              {selected === index + 1 && (
-                <div className="absolute top-[100%] mt-2 z-20">
-                  <Content selected={selected} category={cat} />
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
+            <span className="mt-2 text-xs text-black flex items-center justify-center hover:underline-offset-1 hover:text-black">
+              {cat.name}
+              {cat.name !== "All" && <ChevronDown className="w-3 h-3 ml-1" />}
+            </span>
 
-        {/* Mobile View */}
-        <div className="md:hidden">
-          {isMobileMenuOpen && (
-            <div className="flex flex-col items-center gap-4 my-4">
-              {categories.map((cat, index) => (
-                <div
-                  key={index}
-                  className="flex flex-col items-center text-center w-full cursor-pointer relative"
-                  onClick={() => {
-                    handleSetSelected(index + 1);
-                    if (cat.hasSubmenu) setIsMobileMenuOpen(false); // Close menu after selection if submenu exists
-                  }}
-                >
-                  <Image
-                    src={cat.icon}
-                    alt={cat.name}
-                    width={60}
-                    height={60}
-                    className="rounded-lg object-contain"
-                  />
-                  <span className="mt-2 text-sm text-black flex items-center justify-center">
-                    {cat.name}
-                    {cat.hasSubmenu && <ChevronDown className="w-4 h-4 ml-2" />}
-                  </span>
-                  {selected === index + 1 && cat.hasSubmenu && (
-                    <div className="mt-2 w-full z-20">
-                      <Content selected={selected} category={cat} />
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+            {/* Show dropdown just below the hovered item */}
+            {selected === index + 1 && (
+              <div className="absolute top-[100%] mt-2 z-20">
+                <Content selected={selected} category={cat} />
+              </div>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -199,7 +149,7 @@ const Content = ({
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 8 }}
-      className="w-full max-w-md text-black p-4 shadow-lg bg-white rounded-lg"
+      className="w-full  text-black p-4 mx-10 shadow-lg"
     >
       {category.submenuType === "all" ? null : category.submenuType ===
         "theme" ? null : (
