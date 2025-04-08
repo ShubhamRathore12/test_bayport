@@ -163,7 +163,6 @@ export default function ProductDesignPreview() {
                 height={300}
                 className="border rounded-md mx-auto"
               ></canvas>
-              {/* Display overlay dimensions at the top left */}
 
               {/* Switch and status label at the top right */}
               <div className="absolute top-2 right-2 flex flex-col items-end">

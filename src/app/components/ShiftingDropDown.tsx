@@ -102,7 +102,7 @@ const TabsWithIcons = () => {
 
   return (
     <div onMouseLeave={() => handleSetSelected(null)} className="relative">
-      {/* Category Icons Below */}
+      {/* Category Icons */}
       <div className="flex flex-wrap justify-center items-start gap-4 my-6">
         {categories.map((cat, index) => (
           <div
@@ -124,7 +124,6 @@ const TabsWithIcons = () => {
               {cat.name !== "All" && <ChevronDown className="w-3 h-3 ml-1" />}
             </span>
 
-            {/* Show dropdown just below the hovered item */}
             {selected === index + 1 && (
               <div className="absolute top-[100%] mt-2 z-20">
                 <Content selected={selected} category={cat} />

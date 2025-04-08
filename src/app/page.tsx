@@ -1,18 +1,7 @@
-import Image from "next/image";
-import Link from "next/link";
 import {
-  Heart,
-  Search,
-  ShoppingCart,
-  User,
   Truck,
   BadgePercent,
 } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { CategoryMenu } from "./components/CategoryMenu";
-import { HeroSection } from "./components/HeroSection";
 import { RatingSection } from "./components/RatingSection";
 import { ChatButton } from "./components/ChatButton";
 import Footer from "./components/Footer";
@@ -46,7 +35,7 @@ export default function Home() {
       {/* <CategoryMenu /> */}
       <ShiftingDropDown />
 
-      {/* <HeroSection /> */}
+
 
       {/* Rating Section */}
       <RatingSection />

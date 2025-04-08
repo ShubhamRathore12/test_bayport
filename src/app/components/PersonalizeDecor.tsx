@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 
 export function PersonalizeDecor() {
   return (
@@ -14,8 +13,6 @@ export function PersonalizeDecor() {
             className="w-full h-full object-cover"
           />
         </div>
-
-        {/* Right side with room image */}
       </div>
     </div>
   );

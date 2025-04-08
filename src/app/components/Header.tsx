@@ -15,7 +15,6 @@ const Header = () => {
   return (
     <header className="border-b py-5 px-4 sm:px-6 md:px-10 lg:px-20">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        {/* Top: Logo + Icons (on small screens) */}
         <div className="flex items-center justify-between w-full md:w-auto">
           {/* Logo */}
           <Link href="/" className="flex items-center">
@@ -53,7 +52,6 @@ const Header = () => {
           </div>
         </div>
 
-        {/* User Actions for md+ screens */}
         <div className="hidden md:flex items-center gap-4">
           <Button variant="ghost" size="icon" className="relative">
             <Heart className="h-5 w-5" />
